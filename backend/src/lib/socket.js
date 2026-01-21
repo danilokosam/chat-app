@@ -21,7 +21,9 @@ const userSocketMap = {}; // {userId: socketId}
 io.on("connection", (socket) => {
   console.log("A user connected", socket.id);
 
+  // Extract the authenticated user's ID sent from the frontend during the connection handshake
   const userId = socket.handshake.query.userId;
+  // If a valid userId exists, map it to the current socket.id to track the user's active connection
   if (userId) userSocketMap[userId] = socket.id;
 
   // io.emit() is used to send events to all the connected clients

@@ -4,9 +4,14 @@ import { Message } from "../models/message.model.js";
 import cloudinary from "../lib/cloudinary.js";
 import { getReceiverSocketId, io } from "../lib/socket.js";
 
+/**
+ * Fetches all users from the database except the currently logged-in user.
+ * Used to populate the contact list (sidebar).
+ */
 export const getUsersForSidebar = async (req, res) => {
   try {
     const loggedInUserId = req.user._id;
+    // Find all users where ID is Not Equal ($ne) to my ID
     const filteredUsers = await User.find({
       _id: { $ne: loggedInUserId },
     }).select("-password");
@@ -18,11 +23,14 @@ export const getUsersForSidebar = async (req, res) => {
   }
 };
 
+/**
+ * Retrieves the message history between the current user and another user.
+ */
 export const getMessages = async (req, res) => {
   try {
     const { id: userToChatId } = req.params;
     const myId = req.user._id;
-
+    // Find messages where (I am sender AND you are receiver) OR (You are sender AND I am receiver)
     const messages = await Message.find({
       $or: [
         { senderId: myId, receiverId: userToChatId },
@@ -37,6 +45,9 @@ export const getMessages = async (req, res) => {
   }
 };
 
+/**
+ * Creates a new message, saves it to DB, and sends it via Socket.io if the recipient is online.
+ */
 export const sendMessage = async (req, res) => {
   try {
     const { text, image } = req.body;
@@ -59,7 +70,11 @@ export const sendMessage = async (req, res) => {
 
     await newMessage.save();
 
+    // REAL-TIME LOGIC:
+    // 1. Get the recipient's socket ID from our global map
     const receiverSocketId = getReceiverSocketId(receiverId);
+
+    // 2. If the user is online, emit the message specifically to their socket
     if (receiverSocketId) {
       io.to(receiverSocketId).emit("newMessage", newMessage);
     }

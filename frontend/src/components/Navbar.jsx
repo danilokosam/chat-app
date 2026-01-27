@@ -1,4 +1,4 @@
-import { Link } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { useAuthStore } from '../store/useAuthStore';
 import { LogOut, MessageSquare, Settings, User } from 'lucide-react';
 
@@ -6,7 +6,7 @@ export const Navbar = () => {
   const { logout, authUser } = useAuthStore();
 
   return (
-    <header className='bg-base-100 border-base-300 bg-base-100/80 fixed top-0 z-40 w-full border-b backdrop-blur-lg'>
+    <header className='bg-base-100 border-base-300 fixed top-0 z-40 w-full border-b backdrop-blur-lg'>
       <div className='container mx-auto h-16 px-4'>
         <div className='flex h-full items-center justify-between'>
           <div className='flex items-center gap-8'>

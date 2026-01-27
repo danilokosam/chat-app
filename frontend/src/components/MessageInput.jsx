@@ -98,10 +98,10 @@ export const MessageInput = () => {
         </div>
         <button
           type='submit'
-          className='btn btn-sm btn-circle'
+          className='btn btn-sm btn-circle text-zinc-400'
           disabled={!text.trim() && !imagePreview}
         >
-          <Send size={22} />
+          <Send size={20} />
         </button>
       </form>
     </div>

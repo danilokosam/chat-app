@@ -1,26 +1,64 @@
-# React + Vite
+# 💬 Real-Time Chat Application
 
-This template provides a minimal setup to get React working in Vite with HMR and
-some ESLint rules.
+A full-stack modern chat application featuring real-time messaging, user authentication, and profile management. Built with a **decoupled architecture** for high performance and scalability.
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react)
-  uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in
-  [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc)
-  uses [SWC](https://swc.rs/) for Fast Refresh
 
-## React Compiler
+## 🚀 Live Demo
+* **Frontend (Vercel):** [https://chat-app-ten-livid-46.vercel.app](https://chat-app-ten-livid-46.vercel.app)
+* **Backend (Render):** [https://chat-app-2u3w.onrender.com](https://chat-app-2u3w.onrender.com)
 
-The React Compiler is currently not compatible with SWC. See
-[this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for
-tracking the progress.
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
+* **Real-time messaging:** Instant message delivery powered by **Socket.io**.
+* **User Authentication:** Secure login/signup with **JWT (JSON Web Tokens)** and cookies.
+* **Profile Customization:** Image upload and management via **Cloudinary**.
+* **Responsive Design:** Beautiful and modern UI using **Tailwind CSS 4** and **DaisyUI**.
+* **State Management:** Efficient global state handling with **Zustand**.
+* **Security:** Password hashing with **Bcryptjs** and protected API routes.
 
-If you are developing a production application, we recommend using TypeScript
-with type-aware lint rules enabled. Check out the
-[TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts)
-for information on how to integrate TypeScript and
-[`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 🛠️ Tech Stack
+
+### Frontend
+* **React 19** & **Vite** (Fast Refresh & Optimized build).
+* **Tailwind CSS 4** & **DaisyUI** (Styling).
+* **Zustand** (Global State Management).
+* **Lucide React** (Iconography).
+* **Axios** (API requests).
+* **Socket.io-client** (Real-time communication).
+
+### Backend
+* **Node.js** & **Express 5** (Server-side logic).
+* **MongoDB** & **Mongoose** (Database & Schema modeling).
+* **Socket.io** (WebSocket server).
+* **Cloudinary** (Media storage).
+* **JWT** & **Cookie-parser** (Authentication).
+
+---
+
+## 📁 Project Structure
+This project is organized as a **Monorepo**:
+
+```text
+├── backend/          # Express API & Socket.io server
+│   ├── src/
+│   │   ├── lib/      # DB connection & Socket logic
+│   │   ├── routes/   # API endpoints
+│   │   ├── seeds/    # Database seeding scripts
+│   │   └── index.js  # Entry point
+├── frontend/         # React SPA
+│   ├── src/
+│   │   ├── store/    # Zustand stores (Auth, Chat, Theme)
+│   │   ├── lib/      # Axios & Socket configs
+│   │   └── components/# UI Components & Pages
+```
+---
+
+## ⚙️ Local Setup
+
+1. **Clone the repository:**
+git clone [https://github.com/danilokosam/chat-app.git](https://github.com/danilokosam/chat-app.git)
+cd chat-app

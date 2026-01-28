@@ -22,8 +22,11 @@ app.use(cookieParser());
 // Enable CORS to allow the frontend to communicate with the backend
 app.use(
   cors({
-    origin: "http://localhost:5173", // Frontend URL
-    credentials: true, // Allow sending cookies/headers across origins
+    origin:
+      process.env.NODE_ENV === "production"
+        ? "https://chat-app-ten-livid-46.vercel.app"
+        : "http://localhost:5173",
+    credentials: true,
   }),
 );
 
@@ -32,16 +35,16 @@ app.use("/api/auth", authRoutes); // Authentication routes (login, logout, signu
 app.use("/api/messages", messageRoutes); // Messaging routes (send, receive)
 
 // Deployment configuration for production environment
-if (process.env.NODE_ENV === "production") {
-  // Serve static files from the frontend's build folder (dist)
-  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+// if (process.env.NODE_ENV === "production") {
+//   // Serve static files from the frontend's build folder (dist)
+//   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  // Catch-all route: for any request that doesn't match an API route,
-  // send back the index.html file to let React Router handle the navigation.
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
-  });
-}
+//   // Catch-all route: for any request that doesn't match an API route,
+//   // send back the index.html file to let React Router handle the navigation.
+//   app.get("*", (req, res) => {
+//     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
+//   });
+// }
 
 // Start the integrated HTTP and WebSocket server
 server.listen(PORT, () => {

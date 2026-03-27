@@ -34,6 +34,10 @@ app.use(
 app.use("/api/auth", authRoutes); // Authentication routes (login, logout, signup)
 app.use("/api/messages", messageRoutes); // Messaging routes (send, receive)
 
+app.get("/", (req, res) => {
+  res.status(200).send("Server up and running 🚀");
+});
+
 // Deployment configuration for production environment
 // if (process.env.NODE_ENV === "production") {
 //   // Serve static files from the frontend's build folder (dist)
